@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aura — Music Player</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">🎵 Aura</div>
+
+    <nav class="nav-links">
+      <button class="nav-btn active" data-view="home">
+        <span class="icon">⊞</span> Home
+      </button>
+      <button class="nav-btn" data-view="search">
+        <span class="icon">⊙</span> Search
+      </button>
+      <button class="nav-btn" data-view="library">
+        <span class="icon">☰</span> Library
+      </button>
+    </nav>
+
+    <div class="sidebar-section">
+      <p class="section-label">CATEGORIES</p>
+      <div class="category-tags" id="categoryTags"></div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="section-label">PLAYLISTS</p>
+      <div id="playlistList" class="playlist-list"></div>
+      <button class="new-playlist-btn" id="newPlaylistBtn">+ New Playlist</button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- Home View -->
+    <section class="view active" id="view-home">
+      <div class="view-header">
+        <h1>Good vibes only 🎧</h1>
+        <p class="sub">Pick a track or browse your library</p>
+      </div>
+
+      <div class="search-bar-inline">
+        <input type="text" id="homeSearch" placeholder="Search songs, artists…" />
+      </div>
+
+      <div class="now-featured" id="featuredArt">
+        <div class="featured-art-bg" id="featuredBg"></div>
+        <div class="featured-info">
+          <span class="featured-label">NOW PLAYING</span>
+          <h2 id="featuredTitle">—</h2>
+          <p id="featuredArtist">Select a track to begin</p>
+        </div>
+      </div>
+
+      <p class="section-label" style="margin-top:2rem">ALL TRACKS</p>
+      <div class="track-grid" id="trackGrid"></div>
+    </section>
+
+    <!-- Search View -->
+    <section class="view" id="view-search">
+      <div class="view-header">
+        <h1>Search</h1>
+      </div>
+      <div class="search-bar-inline">
+        <input type="text" id="searchInput" placeholder="Songs, artists, genres…" />
+      </div>
+      <div class="track-grid" id="searchResults"></div>
+    </section>
+
+    <!-- Library View -->
+    <section class="view" id="view-library">
+      <div class="view-header">
+        <h1>Your Library</h1>
+      </div>
+      <div class="category-filter" id="categoryFilter"></div>
+      <div class="track-grid" id="libraryGrid"></div>
+    </section>
+
+  </main>
+
+  <!-- Player Bar -->
+  <footer class="player-bar">
+    <div class="player-track-info">
+      <div class="player-thumb" id="playerThumb">♪</div>
+      <div>
+        <p class="player-title" id="playerTitle">No track selected</p>
+        <p class="player-artist" id="playerArtist">—</p>
+      </div>
+      <button class="like-btn" id="likeBtn" title="Like">♡</button>
+    </div>
+
+    <div class="player-controls">
+      <button class="ctrl-btn" id="shuffleBtn" title="Shuffle">⇄</button>
+      <button class="ctrl-btn" id="prevBtn" title="Previous">⏮</button>
+      <button class="ctrl-btn play-pause" id="playPauseBtn" title="Play">▶</button>
+      <button class="ctrl-btn" id="nextBtn" title="Next">⏭</button>
+      <button class="ctrl-btn" id="repeatBtn" title="Repeat">↻</button>
+
+      <div class="progress-wrapper">
+        <span class="time" id="currentTime">0:00</span>
+        <div class="progress-bar" id="progressBar">
+          <div class="progress-fill" id="progressFill"></div>
+          <div class="progress-thumb" id="progressThumb"></div>
+        </div>
+        <span class="time" id="totalTime">0:00</span>
+      </div>
+    </div>
+
+    <div class="player-right">
+      <span class="vol-icon">🔊</span>
+      <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70" />
+      <button class="ctrl-btn" id="queueBtn" title="Queue">☰</button>
+    </div>
+  </footer>
+
+  <!-- Queue Panel -->
+  <div class="queue-panel" id="queuePanel">
+    <div class="queue-header">
+      <h3>Up Next</h3>
+      <button id="closeQueue">✕</button>
+    </div>
+    <div id="queueList" class="queue-list"></div>
+  </div>
+
+  <!-- Playlist Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <h3>New Playlist</h3>
+      <input type="text" id="playlistNameInput" placeholder="Playlist name…" />
+      <div class="modal-actions">
+        <button id="cancelPlaylist">Cancel</button>
+        <button id="createPlaylist" class="primary">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add to Playlist Context Menu -->
+  <div class="context-menu" id="contextMenu">
+    <p class="ctx-label">Add to playlist</p>
+    <div id="ctxPlaylistItems"></div>
+  </div>
+
+  <audio id="audioEl"></audio>
+
+  <script src="app.js"></script>
+</body>
+</html>
